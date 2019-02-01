@@ -1,6 +1,7 @@
 const Router = require('koa-joi-router');
 const {SwaggerAPI} = require('koa-joi-router-docs');
 const path = require('path');
+const send = require('koa-send');
 
 /**
  * Define routes
@@ -100,7 +101,7 @@ router.get(base.jsonPath, async ctx => {
 });
 
 router.get(base.webPath, async (ctx) => {
-  ctx.body = path.resolve(__dirname,'./assets/swagger/dist/');
+	await send(ctx, ctx.path,{ root:path.resolve(__dirname,'./assets/swagger/dist/') });
 });
 
 
