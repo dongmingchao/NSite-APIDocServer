@@ -100,12 +100,7 @@ router.get(base.jsonPath, async ctx => {
 	}), null, '  ')
 });
 
-router.get(base.webPath, async (ctx) => {
-	console.log(ctx.path,path.resolve(__dirname, './assets/swagger/dist/'));
-	await send(ctx, ctx.path.split(base.webPath)[1], {root: path.resolve(__dirname, './assets/swagger/dist/')});
-});
-
-
 module.exports = {
-	router, generator, base
+	router, generator, base,
+	src: 'node_modules/nsite-api/assets/swagger/dist/'
 };
