@@ -101,7 +101,7 @@ router.get(base.jsonPath, async ctx => {
 });
 
 router.get(base.webPath, async (ctx) => {
-	await send(ctx, ctx.path,{ root:path.resolve(__dirname,'./assets/swagger/dist/') });
+	await send(ctx, ctx.path.split(base.webPath)[1],{ root:path.resolve(__dirname,'./assets/swagger/dist/') });
 });
 
 
