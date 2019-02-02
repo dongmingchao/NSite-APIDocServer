@@ -76,35 +76,36 @@ const generator = new SwaggerAPI();
 
 generator.addJoiRouter(router);
 const base = {
-  jsonPath: '/_api.json',
-  webPath: '/doc',
-  basePath: '/',
-  info: {
-    title: 'Example API',
-    description: 'API for creating and editing examples.',
-    version: '1.1'
-  },
-  tags: [{
-    name: '用户管理',
-    description: '对基础用户的注册/登陆'
-  }],
-  defaultResponses: {}
+	jsonPath: '/_api.json',
+	webPath: '/doc',
+	basePath: '/',
+	info: {
+		title: 'Example API',
+		description: 'API for creating and editing examples.',
+		version: '1.1'
+	},
+	tags: [{
+		name: '用户管理',
+		description: '对基础用户的注册/登陆'
+	}],
+	defaultResponses: {}
 };
 
 /**
  * Swagger JSON API
  */
 router.get(base.jsonPath, async ctx => {
-  ctx.body = JSON.stringify(generator.generateSpec(base, { 
-    defaultResponses: base.defaultResponses
-  }), null, '  ')
+	ctx.body = JSON.stringify(generator.generateSpec(base, {
+		defaultResponses: base.defaultResponses
+	}), null, '  ')
 });
 
 router.get(base.webPath, async (ctx) => {
-	await send(ctx, ctx.path.split(base.webPath)[1],{ root:path.resolve(__dirname,'./assets/swagger/dist/') });
+	console.log(ctx.path,path.resolve(__dirname, './assets/swagger/dist/'));
+	await send(ctx, ctx.path.split(base.webPath)[1], {root: path.resolve(__dirname, './assets/swagger/dist/')});
 });
 
 
 module.exports = {
-  router,generator,base
+	router, generator, base
 };
