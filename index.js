@@ -100,6 +100,12 @@ router.get(base.jsonPath, async ctx => {
 	}), null, '  ')
 });
 
+router.get(base.webPath+'/*', async (ctx) => {
+	let aim = ctx.path.split(base.webPath)[1];
+	if (aim === '/') aim = 'index.html';
+	await send(ctx, aim, {root: 'node_modules/nsite-api/assets/swagger/dist/' });
+});
+
 module.exports = {
 	router, generator, base,
 	src: 'node_modules/nsite-api/assets/swagger/dist/'
